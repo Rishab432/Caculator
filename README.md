@@ -10,6 +10,6 @@ A **PEDMSA+LTR+IO** calculator with a simple pygame GUI.
 - Add // and % operators for cooler division.
 - Add trigonometry functions, maybe logarithim too.
 - Add a +/- button to change the value from positive to negative and vica-versa.
-- Add 'from fractions import Fraction' to give a fraction solution option.
+- Add `from fractions import Fraction` to give a fraction solution option.
 - Make a cleaner interface.
 - Make it into a crappy phone with calendar, calculator, notes, clock and more applications!!
