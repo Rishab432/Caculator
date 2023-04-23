@@ -1,5 +1,5 @@
 # Caculator
-A calculator with a simple pygame GUI.
+A **PEDMSA+LTR+IO** calculator with a simple pygame GUI.
 
 ### Some Notes For The Tool:
 - Brackets are included and work so long as all are matched properly, there must be an expression inside the bracket otherwise there will be an error.
