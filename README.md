@@ -1,4 +1,5 @@
 # Caculator
+### BIG RED ALERT: THIS IS NOT THE COMPLETED VERSION AND THERE ARE MANY ISSUES WITH IT, IT WILL BE COMPLETED SOON...
 A **PEDMSA+LTR+IO** calculator with a simple pygame GUI.
 
 ### Some Notes For The Tool:
