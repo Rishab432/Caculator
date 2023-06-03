@@ -152,10 +152,11 @@ class Calculator:
                 for y in range(self.equation_length):
                     if self.equation[y] == "[":
                         open_list.append(y)
-                    elif self.equation[y] == "]":
-                        self.equation[y] = Calculator.solver(self, self.equation[open_list[-1] + 1:y])
-                        self.equation[open_list[-1]:y] = [''] * len(self.equation[open_list[-1]:y])
-                        del open_list[-1]
+                    else:
+                        if self.equation[y] == "]":
+                            self.equation[y] = Calculator.solver(self, self.equation[open_list[-1] + 1:y])
+                            self.equation[open_list[-1]:y] = [''] * len(self.equation[open_list[-1]:y])
+                            del open_list[-1]
         self.current_char = Calculator.solver(self, self.equation)
         print(self.current_char)
         return self.current_char
@@ -231,6 +232,9 @@ class Calculator:
                         elif self.char2_list[j][i] == 'del':
                             if len(self.current_char) > 0:
                                 self.current_char = ''
+                            else:
+                                if self.equation_length > 0:
+                                    del self.equation[-1]
                         elif self.char2_list[j][i] == 'mode':
                             if self.calc_mode == 'decimals':
                                 self.calc_mode = 'fractions'
