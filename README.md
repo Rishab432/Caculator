@@ -1,7 +1,8 @@
 # Calculator
+A **PEDMSA+LTR+IO** calculator with a simple pygame GUI.
+----
 #### BIG RED ALERT: This is the 'completed' version but it is subject to change. If there are any issues please create an issue in the section, in the case that you know what may be happening, please provide suggestions to improve the code and correct the issue. Thank you :)
 #### Alert: If you want to, you may use the calculator without the given font but it may mess up the visuals (change all occurrences of 'digital-7.ttf' to None).
-A **PEDMSA+LTR+IO** calculator with a simple pygame GUI.
 
 ### Some Notes For The Tool:
 - Brackets are included and work so long as all are matched properly, there must be an expression inside the bracket otherwise there will be an error.
