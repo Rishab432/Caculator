@@ -1,6 +1,7 @@
 # Calculator
 ### BIG RED ALERT: THIS IS THE COMPLETED VERSION, YES THERE MAY BE ISSUES... HAVE FUN!
 ### IF THERE ARE ISSUES PLEASE REPORT THEM IN THE ISSUES PART, I THINK
+#### Alert: If you want to, you may use the calculator without the given font but it may mess up the visuals (change all occurrences of 'digital-7.ttf' to None).
 A **PEDMSA+LTR+IO** calculator with a simple pygame GUI.
 
 ### Some Notes For The Tool:
