@@ -29,7 +29,7 @@ class Calculator:
             'acos': math.acos,
             'tan': math.tan,
             'atan': math.atan,
-            'log': math.log,
+            'log': math.log10,
             '^': op.pow,
             'sqrt': math.sqrt,
             '!': math.factorial,
@@ -66,7 +66,6 @@ class Calculator:
             # Tends to? Variables?
         ]
         self.symbols_list = ['/', '*', '-', '+', '[', '//', '!', '%', '^', ']']
-        self.inequalities = ['<', '<=', '>', '>=', '==', '!=']
         self.trig_functions = ['log', 'sin', 'cos', 'tan', 'asin', 'acos', 'atan']
 
         self.button_list = [
@@ -100,13 +99,11 @@ class Calculator:
     def solver(self, equation_segment):
         for operator_type in self.ops:
             equation_segment = [character for character in equation_segment if character != '']
-            # print("segment:", equation_segment)
             for index, value in enumerate(equation_segment):
                 if value == operator_type:
-                    # print(operator_type, self.ops[operator_type])
                     if value == 'log':
                         equation_segment[index + 1] = str(
-                            self.ops[operator_type](float(equation_segment[index + 1]), 2))
+                            self.ops[operator_type](float(equation_segment[index + 1])))
                         equation_segment[index] = ''
                     elif value in self.trig_functions[1:4]:
                         equation_segment[index + 1] = str(
@@ -158,7 +155,6 @@ class Calculator:
                             self.equation[open_list[-1]:y] = [''] * len(self.equation[open_list[-1]:y])
                             del open_list[-1]
         self.current_char = Calculator.solver(self, self.equation)
-        print(self.current_char)
         return self.current_char
 
     def first_page(self):
@@ -175,6 +171,7 @@ class Calculator:
                         elif self.char_list[j][i] == 'C':  # Clear current and equation
                             self.current_char = ''
                             self.equation = []
+                            self.layer = 0
                         elif self.char_list[j][i] == '=':  # Start calculating
                             if self.equation_length > 0:  # Check for equation
                                 if self.current_char != '':  # Add current if filled
@@ -184,7 +181,7 @@ class Calculator:
                                     self.current_char = "{:e}".format(float(self.current_char))
                                     self.current_char = self.current_char[0:4] + self.current_char[-4:]
                                 self.equation = []
-                        elif self.char_list[j][i] in self.symbols_list[:]:  # For operators and brackets
+                        elif self.char_list[j][i] in self.symbols_list:  # For operators and brackets
                             if self.char_list[j][i] == '[':  # Add layer for '['
                                 if self.current_char == '':
                                     if self.equation_length > 0:
@@ -234,6 +231,8 @@ class Calculator:
                                 self.current_char = ''
                             else:
                                 if self.equation_length > 0:
+                                    if self.equation[-1] == '[':
+                                        self.layer -= 1
                                     del self.equation[-1]
                         elif self.char2_list[j][i] == 'mode':
                             if self.calc_mode == 'decimals':
@@ -263,7 +262,7 @@ class Calculator:
                             self.equation.append(self.current_char)
                             self.equation.append(']')
                             self.current_char = ''
-                        elif self.char2_list[j][i] in self.symbols_list[:]:  # For operators and brackets
+                        elif self.char2_list[j][i] in self.symbols_list:  # For operators and brackets
                             if self.current_char != '' or (
                                     self.equation_length > 0 and (
                                     self.equation[-1] == ']' or self.equation[-1] == '!')):
@@ -283,17 +282,16 @@ class Calculator:
                                 self.current_char[0] = ''
                             else:
                                 self.current_char = '-' + self.current_char
-                        elif self.char2_list[j][i] in self.trig_functions:
+                        elif self.char2_list[j][i] in self.trig_functions or self.char2_list[j][i] == 'sqrt':
                             if self.equation_length == 0 or (self.equation[-1] != ']' and self.equation[-1] != '!'):
                                 self.equation.append(self.char2_list[j][i])
                                 self.equation.append('[')
+                                if self.current_char != '':  # Append current if filled
+                                    self.equation.append(self.current_char)
+                                    self.current_char = ''
                                 self.layer += 1
                         else:
-                            if self.char2_list[j][i] == 'sqrt':
-                                if self.equation_length == 0 or (self.equation[-1] != ']' and self.equation[-1] != '!'):
-                                    self.equation.append(self.char2_list[j][i])
-                                    self.equation.append('[')
-                                    self.layer += 1
+                            continue
 
     def interface(self):
         while self.running:
